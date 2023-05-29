@@ -1,0 +1,16 @@
+{
+  "name": "nextjs-sanity-landing-page",
+  "version": "1.0.0",
+  "description": "Example repo with separate Sanity Studio v3 and Next.js 13 projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dariuspasca/nextjs-sanity-landing-page.git"
+  },
+  "author": "Darius Pasca",
+  "keywords": [],
+  "license": "ISC"
+}
