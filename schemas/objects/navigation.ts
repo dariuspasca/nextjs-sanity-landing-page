@@ -1,33 +1,31 @@
-import { defineField, defineType } from "sanity";
-import { List } from "lucide-react";
+import { defineType } from "sanity";
 
 export default defineType({
-  name: "nav",
+  name: "navigation",
   type: "document",
   title: "Navigation",
-  icon: List,
   fields: [
-    defineField({
+    {
       name: "title",
       type: "string",
       title: "Title",
       description: "The text to display in the navigation menu",
       validation: (Rule) => Rule.required().min(1).max(50),
-    }),
-    defineField({
+    },
+    {
       name: "has_external_link",
       type: "boolean",
       title: "External link",
       description: "The navigation takes you to an external page?",
       initialValue: false,
-    }),
-    defineField({
+    },
+    {
       name: "external_link",
       type: "string",
       title: "Link",
       hidden: ({ document }) => !document?.has_external_link,
-    }),
-    defineField({
+    },
+    {
       title: "Slug",
       name: "slug",
       type: "slug",
@@ -46,8 +44,8 @@ export default defineType({
             : true
         ),
       hidden: ({ document }) => !!document?.has_external_link,
-    }),
-    defineField({
+    },
+    {
       title: "Page",
       name: "main_page",
       type: "reference",
@@ -56,16 +54,16 @@ export default defineType({
         disableNew: true,
       },
       hidden: ({ document }) => !!document?.has_external_link,
-    }),
-    defineField({
+    },
+    {
       name: "has_secondary_pages",
       type: "boolean",
       title: "Sottopagine",
       description: "Has secondary pages?",
       initialValue: false,
       hidden: ({ document }) => !!document?.has_external_link,
-    }),
-    defineField({
+    },
+    {
       title: "Secondary pages",
       name: "secondary_pages",
       type: "array",
@@ -84,6 +82,6 @@ export default defineType({
       ],
       hidden: ({ document }) =>
         !!document?.has_external_link || !document?.has_secondary_pages,
-    }),
+    },
   ],
 });

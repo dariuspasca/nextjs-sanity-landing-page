@@ -45,7 +45,6 @@ export default defineType({
       title: "SEO",
       name: "seo",
       type: "object",
-
       fields: [
         {
           name: "metaTitle",
@@ -75,11 +74,11 @@ export default defineType({
           description: "Tell to search engines to not index this page",
           initialValue: false,
         },
-        {
-          name: "sharedImage",
+        defineField({
+          name: "ogImage",
+          title: "Open Graph Image",
           type: "image",
-          title: "Shared Image",
-          description: "A custom image to show when sharing the page link",
+          description: "Displayed on social cards and search engine results.",
           options: {
             hotspot: true,
           },
@@ -91,7 +90,7 @@ export default defineType({
               description: "A description of the image content",
             },
           ],
-        },
+        }),
       ],
     }),
   ],

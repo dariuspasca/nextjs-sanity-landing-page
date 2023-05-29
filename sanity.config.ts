@@ -4,8 +4,9 @@ import { pageStructure, singletonPlugin } from "~/plugins/settings";
 import { deskTool } from "sanity/desk";
 import { apiVersion, dataset, projectId } from "~/lib/sanity.api";
 import home from "~/schemas/singletons/home";
+import settings from "~/schemas/singletons/settings";
 import page from "~/schemas/documents/page";
-import nav from "~/schemas/documents/nav";
+import navigation from "~/schemas/objects/navigation";
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE ||
@@ -22,14 +23,16 @@ export default defineConfig({
     types: [
       // Singletons
       home,
+      settings,
       // Documents
       page,
-      nav,
+      // Objects
+      navigation,
     ],
   },
   plugins: [
     deskTool({
-      structure: pageStructure([home]),
+      structure: pageStructure([home, settings]),
     }),
     singletonPlugin([home.name]),
     visionTool({ defaultApiVersion: apiVersion }),
