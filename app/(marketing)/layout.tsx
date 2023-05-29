@@ -2,6 +2,7 @@ import { MainNav } from "~/components/main-nav";
 import { SiteFooter } from "~/components/site-footer";
 import { TailwindIndicator } from "~/components/tailwind-indicator";
 import { siteConfig } from "~/config/site";
+import { getSettingsPage } from "~/lib/sanity.client";
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -49,12 +50,13 @@ export const metadata = {
   manifest: `${siteConfig.url}/site.webmanifest`,
 };
 
-export default function PageLayout({ children }: PageLayoutProps) {
+export default async function PageLayout({ children }: PageLayoutProps) {
+  const data = await getSettingsPage();
   return (
     <div className="flex min-h-screen flex-col">
       <header className="container z-40 bg-background">
         <div className="flex h-20 items-center justify-between py-6">
-          <MainNav />
+          <MainNav items={data?.menuItems ?? []} />
         </div>
       </header>
       <main className="flex-1">{children}</main>
