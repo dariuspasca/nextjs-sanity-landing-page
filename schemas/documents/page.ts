@@ -10,8 +10,8 @@ export default defineType({
     defineField({
       name: "title",
       type: "string",
-      title: "Titolo",
-      description: "Titolo pagina",
+      title: "Title",
+      description: "Page title",
       validation: (Rule) => Rule.required().min(1).max(50),
     }),
     defineField({
@@ -19,7 +19,7 @@ export default defineType({
       name: "slug",
       type: "slug",
       description:
-        "Il nome univoco della pagina verrà visualizzato nella barra di ricerca(es: https://bitrock.com/il_mio_slug",
+        "The unique page name to display into the search bar(es: https://acme.com/my_page_slug)",
       options: {
         source: "title",
         maxLength: 200, // will be ignored if slugify is set
@@ -32,13 +32,13 @@ export default defineType({
       name: "content",
       type: "array",
       of: [{ type: "block" }],
-      description: "Il contenuto della pagina",
-      title: "Contenuto",
+      description: "The page content",
+      title: "Content",
     }),
     defineField({
       name: "documents",
       type: "array",
-      title: "Documenti Allegati",
+      title: "Attached documents",
       of: [{ type: "file" }],
     }),
     defineField({
@@ -51,38 +51,35 @@ export default defineType({
           name: "metaTitle",
           type: "string",
           title: "Meta Title",
-          description: "Il titolo della pagina in versione descrittiva",
+          description: "A descriptive page title",
           validation: (Rule) => Rule.required().min(1).max(80),
         },
         {
           name: "metaDescription",
           type: "string",
           title: "Meta Description",
-          description: "Una descrizione della pagina",
+          description: "A description of the page content",
           validation: (Rule) => Rule.required().min(1).max(120),
         },
         {
           name: "keywords",
           type: "string",
           title: "Keywords",
-          description:
-            'Una serie di parole chiave divise dal simbolo ";" (punto e virgola',
+          description: 'A list of keywords separated by ";"',
           validation: (Rule) => Rule.required().min(1).max(50),
         },
         {
           name: "preventIndexing",
           type: "boolean",
           title: "Prevent Indexing",
-          description:
-            "Indica ai motori di ricerca di non indicizzare questa pagina",
+          description: "Tell to search engines to not index this page",
           initialValue: false,
         },
         {
           name: "sharedImage",
           type: "image",
           title: "Shared Image",
-          description:
-            "Un immagine personalizzata da utilizzare quando viene condivisa la pagina",
+          description: "A custom image to show when sharing the page link",
           options: {
             hotspot: true,
           },
@@ -91,7 +88,7 @@ export default defineType({
               name: "alt",
               type: "string",
               title: "Alt",
-              description: "Descrizione contenuto immagine",
+              description: "A description of the image content",
             },
           ],
         },

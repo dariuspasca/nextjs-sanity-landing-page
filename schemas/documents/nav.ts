@@ -10,19 +10,19 @@ export default defineType({
     defineField({
       name: "title",
       type: "string",
-      title: "Titolo",
-      description: "Titolo da mostrare nel menu",
+      title: "Title",
+      description: "The text to display in the navigation menu",
       validation: (Rule) => Rule.required().min(1).max(50),
     }),
     defineField({
       name: "has_external_link",
       type: "boolean",
-      title: "Link esterno",
-      description: "La voce porta ad un link esterno?",
+      title: "External link",
+      description: "The navigation takes you to an external page?",
       initialValue: false,
     }),
     defineField({
-      name: "link",
+      name: "external_link",
       type: "string",
       title: "Link",
       hidden: ({ document }) => !document?.has_external_link,
@@ -32,7 +32,7 @@ export default defineType({
       name: "slug",
       type: "slug",
       description:
-        "Il nome univoco che verrà visualizzato nella barra di ricerca(es: https://bitrock.com/il_mio_slug",
+        "The unique page name to display into the search bar(es: https://acme.com/my_page_slug)",
       options: {
         source: "title",
         maxLength: 200, // will be ignored if slugify is set
@@ -48,7 +48,7 @@ export default defineType({
       hidden: ({ document }) => !!document?.has_external_link,
     }),
     defineField({
-      title: "Pagina",
+      title: "Page",
       name: "main_page",
       type: "reference",
       to: [{ type: "page" }],
@@ -61,12 +61,12 @@ export default defineType({
       name: "has_secondary_pages",
       type: "boolean",
       title: "Sottopagine",
-      description: "Ha delle sottopagine?",
+      description: "Has secondary pages?",
       initialValue: false,
       hidden: ({ document }) => !!document?.has_external_link,
     }),
     defineField({
-      title: "Sotto pagine",
+      title: "Secondary pages",
       name: "secondary_pages",
       type: "array",
       of: [

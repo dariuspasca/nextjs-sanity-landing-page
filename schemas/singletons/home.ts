@@ -14,7 +14,7 @@ export default defineType({
     }),
     defineField({
       name: "description",
-      title: "CTA",
+      title: "Description",
       type: "text",
     }),
   ],
