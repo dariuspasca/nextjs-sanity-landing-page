@@ -3,8 +3,12 @@ import { createClient } from "next-sanity";
 import {
   homePageQuery,
   settingsQuery,
+  pagesBySlugQuery,
+  pagesSeoBySlugQuery,
   HomePageQueryResponse,
   SettingsQueryResponse,
+  PagesBySlugQueryResponse,
+  PagesSeoBySlugQueryResponse,
 } from "./sanity.queries";
 
 /**
@@ -26,4 +30,16 @@ export async function getSettingsPage(token?: string) {
   return await sanityClient(token)
     ?.fetch(settingsQuery)
     .then((result) => SettingsQueryResponse.parse(result));
+}
+
+export async function getPageBySlug(slug: string, token?: string) {
+  return await sanityClient(token)
+    ?.fetch(pagesBySlugQuery, { slug })
+    .then((result) => PagesBySlugQueryResponse.parse(result));
+}
+
+export async function getPageSeoBySlug(slug: string, token?: string) {
+  return await sanityClient(token)
+    ?.fetch(pagesSeoBySlugQuery, { slug })
+    .then((result) => PagesSeoBySlugQueryResponse.parse(result));
 }

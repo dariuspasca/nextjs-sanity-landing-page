@@ -36,6 +36,7 @@ export function MainNav({ items, children }: MainNavProps) {
                 key={navItem._id}
                 href={navItem.external_link ?? ""}
                 target="_blank"
+                rel="noreferrer noopener"
               >
                 {navItem.title}
               </a>
@@ -64,17 +65,20 @@ export function MainNav({ items, children }: MainNavProps) {
                   </TooltipTrigger>
                   <TooltipContent align="start" alignOffset={14}>
                     <div className="flex flex-col gap-2 bg-card px-4 py-2">
-                      {navItem.secondary_pages.map((navItemSecondary) => (
-                        <Link
-                          key={navItemSecondary._id}
-                          href={`${navItem.slug ? `/${navItem.slug}/` : ""}${
-                            navItemSecondary.slug ?? ""
-                          }`}
-                          className="flex items-center text-lg font-medium text-foreground/60 transition-colors hover:text-foreground/80 sm:text-sm"
-                        >
-                          {navItemSecondary.title}
-                        </Link>
-                      ))}
+                      {navItem.secondary_pages.map((navItemSecondary) => {
+                        const subCategorySlug = navItem.main_page?.slug;
+                        return (
+                          <Link
+                            key={navItemSecondary._id}
+                            href={`${
+                              subCategorySlug ? `/${subCategorySlug}/` : ""
+                            }${navItemSecondary.slug ?? ""}`}
+                            className="flex items-center text-lg font-medium text-foreground/60 transition-colors hover:text-foreground/80 sm:text-sm"
+                          >
+                            {navItemSecondary.title}
+                          </Link>
+                        );
+                      })}
                     </div>
                   </TooltipContent>
                 </Tooltip>
@@ -93,6 +97,7 @@ export function MainNav({ items, children }: MainNavProps) {
           }
         })}
       </nav>
+      {children}
     </div>
   );
 }

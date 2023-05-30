@@ -1,7 +1,10 @@
 import { getHomePage } from "~/lib/sanity.client";
+import { notFound } from "next/navigation";
 
 export default async function HomePage() {
   const data = await getHomePage();
+
+  if (!data) notFound();
 
   return (
     <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
