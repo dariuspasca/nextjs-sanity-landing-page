@@ -70,7 +70,6 @@ export const PagesBySlugQueryResponse = z
   .object({
     _id: z.string().min(1),
     title: z.string().min(1),
-    slug: Slug,
     content: portableContentBlockZ.nullish(),
   })
   .nullish()
