@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * This plugin contains all the logic for setting up the singletons
  */
@@ -11,17 +15,18 @@ export const singletonPlugin = (types: string[]) => {
     document: {
       // Hide 'Singletons (such as Home)' from new document options
       // https://user-images.githubusercontent.com/81981/195728798-e0c6cf7e-d442-4e58-af3a-8cd99d7fcc28.png
-      newDocumentOptions: (prev, { creationContext }) => {
+      newDocumentOptions: (prev: any[], { creationContext }: any) => {
         if (creationContext.type === "global") {
           return prev.filter(
-            (templateItem) => !types.includes(templateItem.templateId)
+            (templateItem: { templateId: string }) =>
+              !types.includes(templateItem.templateId)
           )
         }
 
         return prev
       },
       // Removes the "duplicate" action on the Singletons (such as Home)
-      actions: (prev, { schemaType }) => {
+      actions: (prev: any[], { schemaType }: any) => {
         if (types.includes(schemaType)) {
           return prev.filter(({ action }) => action !== "duplicate")
         }
