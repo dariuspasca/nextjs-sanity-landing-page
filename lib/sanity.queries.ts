@@ -27,7 +27,7 @@ export const settingsQuery = groq`
   }
 `
 
-const Slug = z.string().nullish()
+const Slug = z.string().min(1)
 
 const SettingsNavPage = z.object({
   _id: z.string().min(1),
@@ -101,3 +101,34 @@ export const FooterQueryResponse = z
     content: portableContentBlockZ.nullish(),
   })
   .nullish()
+
+export const mainPagesSlugsQuery = groq`
+   *[_type == "navigation" && has_secondary_pages == false && has_external_link == false]{
+      main_page->{'slug':slug.current,  _updatedAt}
+  }
+`
+
+const pageSlugZ = z.object({
+  slug: Slug,
+  _updatedAt: z.string(),
+})
+
+export const MainPagesSlugsQueryResponse = z
+  .object({
+    main_page: pageSlugZ,
+  })
+  .array()
+
+export const secondaryPagesSlugsQuery = groq`
+  *[_type == "navigation" && has_secondary_pages == true && has_external_link == false]{
+      main_page->{'slug':slug.current,  _updatedAt},
+      secondary_pages[]->{'slug':slug.current,  _updatedAt}
+  }
+`
+
+export const SecondaryPagesSlugsQueryResponse = z
+  .object({
+    main_page: pageSlugZ,
+    secondary_pages: pageSlugZ.array(),
+  })
+  .array()

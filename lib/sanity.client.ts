@@ -6,10 +6,14 @@ import {
   FooterQueryResponse,
   homePageQuery,
   HomePageQueryResponse,
+  mainPagesSlugsQuery,
+  MainPagesSlugsQueryResponse,
   pagesBySlugQuery,
   PagesBySlugQueryResponse,
   pagesSeoBySlugQuery,
   PagesSeoBySlugQueryResponse,
+  secondaryPagesSlugsQuery,
+  SecondaryPagesSlugsQueryResponse,
   settingsQuery,
   SettingsQueryResponse,
 } from "./sanity.queries"
@@ -51,4 +55,16 @@ export async function getPageSeoBySlug(slug: string, token?: string) {
   return await sanityClient(token)
     ?.fetch(pagesSeoBySlugQuery, { slug })
     .then((result) => PagesSeoBySlugQueryResponse.parse(result))
+}
+
+export async function getMainPagesSlugs(token?: string) {
+  return await sanityClient(token)
+    ?.fetch(mainPagesSlugsQuery)
+    .then((result) => MainPagesSlugsQueryResponse.parse(result))
+}
+
+export async function getSecondaryPagesSlugs(token?: string) {
+  return await sanityClient(token)
+    ?.fetch(secondaryPagesSlugsQuery)
+    .then((result) => SecondaryPagesSlugsQueryResponse.parse(result))
 }
