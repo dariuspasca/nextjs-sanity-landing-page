@@ -47,7 +47,11 @@
     "tailwindcss": "^3.3.0",
     "typescript": "^5.0.4"
   },
-  "ct3aMetadata": {
-    "initVersion": "7.13.1"
+  "peerDependencies": {
+    "@sanity/types": "^3.0.0",
+    "react": "^18.0.0"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }
