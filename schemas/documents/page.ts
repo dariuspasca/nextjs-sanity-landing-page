@@ -36,12 +36,6 @@ export default defineType({
       title: "Content",
     }),
     defineField({
-      name: "documents",
-      type: "array",
-      title: "Attached documents",
-      of: [{ type: "file" }],
-    }),
-    defineField({
       title: "SEO",
       name: "seo",
       type: "object",
@@ -49,21 +43,21 @@ export default defineType({
         {
           name: "metaTitle",
           type: "string",
-          title: "Meta Title",
+          title: "SEO Title",
           description: "A descriptive page title",
           validation: (Rule) => Rule.required().min(1).max(80),
         },
         {
           name: "metaDescription",
           type: "string",
-          title: "Meta Description",
+          title: "SEO Description",
           description: "A description of the page content",
           validation: (Rule) => Rule.required().min(1).max(120),
         },
         {
           name: "keywords",
           type: "string",
-          title: "Keywords",
+          title: "SEO Keywords",
           description: 'A list of keywords separated by ";"',
           validation: (Rule) => Rule.required().min(1).max(50),
         },

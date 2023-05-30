@@ -26,26 +26,6 @@ export default defineType({
       hidden: ({ document }) => !document?.has_external_link,
     },
     {
-      title: "Slug",
-      name: "slug",
-      type: "slug",
-      description:
-        "The unique page name to display into the search bar(es: https://acme.com/my_page_slug)",
-      options: {
-        source: "title",
-        maxLength: 200, // will be ignored if slugify is set
-        slugify: (input: string) =>
-          input.toLowerCase().replace(/\s+/g, "-").slice(0, 200),
-      },
-      validation: (Rule) =>
-        Rule.custom((field, context) =>
-          !context.document?.has_external_link && field === undefined
-            ? "This field must not be empty."
-            : true
-        ),
-      hidden: ({ document }) => !!document?.has_external_link,
-    },
-    {
       title: "Page",
       name: "main_page",
       type: "reference",

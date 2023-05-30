@@ -17,7 +17,6 @@ export const settingsQuery = groq`
   *[_type == "settings"][0]{
     menuItems[]->{
       _id,
-      "slug": slug.current,
       title,
       has_external_link,
       external_link,
@@ -38,7 +37,6 @@ const SettingsNavPage = z.object({
 
 export const SettingsMenuItem = z.object({
   _id: z.string().min(1),
-  slug: Slug,
   title: z.string().min(1),
   has_external_link: z.boolean(),
   external_link: z.string().nullish(),
