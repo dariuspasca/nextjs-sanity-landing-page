@@ -35,7 +35,7 @@ export default defineConfig({
     deskTool({
       structure: pageStructure([home, settings]),
     }),
-    singletonPlugin([home.name]),
+    singletonPlugin({ types: ["home", "settings"] }),
     visionTool({ defaultApiVersion: apiVersion }),
   ],
 })
