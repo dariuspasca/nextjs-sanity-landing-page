@@ -5,10 +5,12 @@ import {
   settingsQuery,
   pagesBySlugQuery,
   pagesSeoBySlugQuery,
+  footerQuery,
   HomePageQueryResponse,
   SettingsQueryResponse,
   PagesBySlugQueryResponse,
   PagesSeoBySlugQueryResponse,
+  FooterQueryResponse,
 } from "./sanity.queries";
 
 /**
@@ -24,6 +26,12 @@ export async function getHomePage(token?: string) {
   return await sanityClient(token)
     ?.fetch(homePageQuery)
     .then((result) => HomePageQueryResponse.parse(result));
+}
+
+export async function getFooter(token?: string) {
+  return await sanityClient(token)
+    ?.fetch(footerQuery)
+    .then((result) => FooterQueryResponse.parse(result));
 }
 
 export async function getSettingsPage(token?: string) {

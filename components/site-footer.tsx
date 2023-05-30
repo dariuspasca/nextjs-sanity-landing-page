@@ -1,21 +1,16 @@
-import { siteConfig } from "~/config/site";
-import { cn } from "~/lib/utils";
+import { type FooterQueryResponse } from "~/lib/sanity.queries";
+import { type z } from "zod";
+import { CustomPortableText } from "~/components/custom-portable-text";
 
-export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
+interface FooterProps {
+  footer: z.infer<typeof FooterQueryResponse>;
+}
+
+export function SiteFooter({ footer }: FooterProps) {
   return (
-    <footer className={cn(className)}>
+    <footer>
       <div className="container flex flex-col items-center justify-center py-10 md:h-24 md:flex-row md:py-0">
-        <p className="text-center text-sm leading-loose md:text-left">
-          A very awesome footer{" "}
-          <a
-            href={siteConfig.links.twitter}
-            target="_blank"
-            rel="noreferrer"
-            className="font-medium underline underline-offset-4"
-          >
-            link
-          </a>
-        </p>
+        {footer?.content && <CustomPortableText value={footer.content} />}
       </div>
     </footer>
   );

@@ -51,6 +51,14 @@ export const SettingsQueryResponse = z.object({
   menuItems: SettingsMenuItem.array(),
 });
 
+export const pagesBySlugQuery = groq`
+  *[_type == "page" && slug.current == $slug][0] {
+    _id,
+    title,
+    content,
+  }
+`;
+
 const baseTypedObjectZ = z
   .object({
     _type: z.string(),
@@ -58,20 +66,20 @@ const baseTypedObjectZ = z
   })
   .passthrough();
 
+export const portableContentBlockZ = z.array(baseTypedObjectZ);
+
 export const PagesBySlugQueryResponse = z
   .object({
     _id: z.string().min(1),
     title: z.string().min(1),
     slug: Slug,
-    content: z.array(baseTypedObjectZ).nullable(),
+    content: portableContentBlockZ.nullish(),
   })
   .nullish();
 
-export const pagesBySlugQuery = groq`
+export const pagesSeoBySlugQuery = groq`
   *[_type == "page" && slug.current == $slug][0] {
-    _id,
-    title,
-    content,
+    ...seo
   }
 `;
 
@@ -84,8 +92,14 @@ export const PagesSeoBySlugQueryResponse = z
   })
   .nullish();
 
-export const pagesSeoBySlugQuery = groq`
-  *[_type == "page" && slug.current == $slug][0] {
-    ...seo
+export const footerQuery = groq`
+  *[_type == "settings"][0]{
+    'content': footer
   }
 `;
+
+export const FooterQueryResponse = z
+  .object({
+    content: portableContentBlockZ.nullish(),
+  })
+  .nullish();

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { getPageBySlug, getPageSeoBySlug } from "~/lib/sanity.client";
-import { PortableText } from "@portabletext/react";
+import { CustomPortableText } from "~/components/custom-portable-text";
 
 interface PageProps {
   params: {
@@ -52,7 +52,7 @@ export default async function Page({ params }: PageProps) {
       )}
       <div className="mx-auto max-w-5xl">
         <h1 className="my-8 text-2xl font-extrabold">{page.title}</h1>
-        {page.content && <PortableText value={page.content} />}
+        {page.content && <CustomPortableText value={page.content} />}
       </div>
     </div>
   );
