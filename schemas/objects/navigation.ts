@@ -1,9 +1,11 @@
+import { List } from "lucide-react"
 import { defineType } from "sanity"
 
 export default defineType({
   name: "navigation",
   type: "document",
   title: "Navigation",
+  icon: List,
   fields: [
     {
       name: "title",

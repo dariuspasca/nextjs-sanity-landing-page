@@ -58,10 +58,10 @@ export function MainNav({ items, children }: MainNavProps) {
                     {navItem.main_page ? (
                       <Link
                         key={navItem.main_page._id}
-                        href={`/${navItem.main_page.slug ?? ""}`}
+                        href={`/${navItem.main_page.slug}`}
                         className={cn(
                           "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                          navItem.main_page?.slug === segment
+                          navItem.main_page.slug === segment
                             ? "text-foreground"
                             : "text-foreground/60"
                         )}
