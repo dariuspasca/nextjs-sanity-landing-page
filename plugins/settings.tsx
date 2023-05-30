@@ -1,42 +1,47 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * This plugin contains all the logic for setting up the singletons
  */
 
-import { type DocumentDefinition } from "sanity"
+import { definePlugin, type DocumentDefinition } from "sanity"
 import { type StructureResolver } from "sanity/desk"
 
-export const singletonPlugin = (types: string[]) => {
-  return {
-    name: "singletonPlugin",
-    document: {
-      // Hide 'Singletons (such as Home)' from new document options
-      // https://user-images.githubusercontent.com/81981/195728798-e0c6cf7e-d442-4e58-af3a-8cd99d7fcc28.png
-      newDocumentOptions: (prev: any[], { creationContext }: any) => {
-        if (creationContext.type === "global") {
-          return prev.filter(
-            (templateItem: { templateId: string }) =>
-              !types.includes(templateItem.templateId)
-          )
-        }
-
-        return prev
-      },
-      // Removes the "duplicate" action on the Singletons (such as Home)
-      actions: (prev: any[], { schemaType }: any) => {
-        if (types.includes(schemaType)) {
-          return prev.filter(({ action }) => action !== "duplicate")
-        }
-
-        return prev
-      },
-    },
-  }
+type SingletonPluginOptions = {
+  types: string[]
 }
 
+export const singletonPlugin = definePlugin<SingletonPluginOptions>(
+  ({ types }) => {
+    return {
+      name: "singletonPlugin",
+      document: {
+        // Hide 'Singletons (such as Home)' from new document options
+        // https://user-images.githubusercontent.com/81981/195728798-e0c6cf7e-d442-4e58-af3a-8cd99d7fcc28.png
+        newDocumentOptions: (prev, { creationContext }) => {
+          if (creationContext.type === "global") {
+            return prev.filter(
+              (templateItem) => !types.includes(templateItem.templateId)
+            )
+          }
+
+          return prev
+        },
+        // Removes the "duplicate" action on the Singletons
+        actions: (prev, { schemaType }) => {
+          if (types.includes(schemaType)) {
+            return prev.filter(
+              ({ action }) =>
+                action !== "duplicate" &&
+                action !== "delete" &&
+                action !== "unpublish"
+            )
+          }
+
+          return prev
+        },
+      },
+    }
+  }
+)
 // The StructureResolver is how we're changing the DeskTool structure to linking to document (named Singleton)
 // like how "Home" is handled.
 export const pageStructure = (
