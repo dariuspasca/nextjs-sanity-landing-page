@@ -21,5 +21,5 @@ export default function Loader() {
         <span className="sr-only">Loading...</span>
       </div>
     </div>
-  );
+  )
 }

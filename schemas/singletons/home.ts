@@ -1,5 +1,5 @@
-import { Home } from "lucide-react";
-import { defineField, defineType } from "sanity";
+import { Home } from "lucide-react"
+import { defineField, defineType } from "sanity"
 
 export default defineType({
   name: "home",
@@ -18,4 +18,4 @@ export default defineType({
       type: "text",
     }),
   ],
-});
+})

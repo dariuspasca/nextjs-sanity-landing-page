@@ -1,4 +1,4 @@
-import { type SiteConfig } from "types";
+import { type SiteConfig } from "types"
 
 export const siteConfig: SiteConfig = {
   name: "Nextjs + Sanity",
@@ -9,4 +9,4 @@ export const siteConfig: SiteConfig = {
   links: {
     twitter: "https://twitter.com/pasca_darius",
   },
-};
+}

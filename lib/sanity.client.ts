@@ -1,17 +1,18 @@
-import { projectId, dataset, apiVersion, useCdn } from "./sanity.api";
-import { createClient } from "next-sanity";
+import { createClient } from "next-sanity"
+
+import { apiVersion, dataset, projectId, useCdn } from "./sanity.api"
 import {
-  homePageQuery,
-  settingsQuery,
-  pagesBySlugQuery,
-  pagesSeoBySlugQuery,
   footerQuery,
-  HomePageQueryResponse,
-  SettingsQueryResponse,
-  PagesBySlugQueryResponse,
-  PagesSeoBySlugQueryResponse,
   FooterQueryResponse,
-} from "./sanity.queries";
+  homePageQuery,
+  HomePageQueryResponse,
+  pagesBySlugQuery,
+  PagesBySlugQueryResponse,
+  pagesSeoBySlugQuery,
+  PagesSeoBySlugQueryResponse,
+  settingsQuery,
+  SettingsQueryResponse,
+} from "./sanity.queries"
 
 /**
  * Checks if it's safe to create a client instance, as `@sanity/client` will throw an error if `projectId` is false
@@ -19,35 +20,35 @@ import {
 export const sanityClient = (token?: string) => {
   return projectId
     ? createClient({ projectId, dataset, apiVersion, useCdn, token: token })
-    : null;
-};
+    : null
+}
 
 export async function getHomePage(token?: string) {
   return await sanityClient(token)
     ?.fetch(homePageQuery)
-    .then((result) => HomePageQueryResponse.parse(result));
+    .then((result) => HomePageQueryResponse.parse(result))
 }
 
 export async function getFooter(token?: string) {
   return await sanityClient(token)
     ?.fetch(footerQuery)
-    .then((result) => FooterQueryResponse.parse(result));
+    .then((result) => FooterQueryResponse.parse(result))
 }
 
 export async function getSettingsPage(token?: string) {
   return await sanityClient(token)
     ?.fetch(settingsQuery)
-    .then((result) => SettingsQueryResponse.parse(result));
+    .then((result) => SettingsQueryResponse.parse(result))
 }
 
 export async function getPageBySlug(slug: string, token?: string) {
   return await sanityClient(token)
     ?.fetch(pagesBySlugQuery, { slug })
-    .then((result) => PagesBySlugQueryResponse.parse(result));
+    .then((result) => PagesBySlugQueryResponse.parse(result))
 }
 
 export async function getPageSeoBySlug(slug: string, token?: string) {
   return await sanityClient(token)
     ?.fetch(pagesSeoBySlugQuery, { slug })
-    .then((result) => PagesSeoBySlugQueryResponse.parse(result));
+    .then((result) => PagesSeoBySlugQueryResponse.parse(result))
 }

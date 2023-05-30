@@ -1,9 +1,10 @@
-import { type FooterQueryResponse } from "~/lib/sanity.queries";
-import { type z } from "zod";
-import { CustomPortableText } from "~/components/custom-portable-text";
+import { type z } from "zod"
+
+import { type FooterQueryResponse } from "~/lib/sanity.queries"
+import { CustomPortableText } from "~/components/custom-portable-text"
 
 interface FooterProps {
-  footer: z.infer<typeof FooterQueryResponse>;
+  footer: z.infer<typeof FooterQueryResponse>
 }
 
 export function SiteFooter({ footer }: FooterProps) {
@@ -13,5 +14,5 @@ export function SiteFooter({ footer }: FooterProps) {
         {footer?.content && <CustomPortableText value={footer.content} />}
       </div>
     </footer>
-  );
+  )
 }

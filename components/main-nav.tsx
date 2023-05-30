@@ -1,30 +1,32 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
-import { Pizza, X } from "lucide-react";
-import { siteConfig } from "~/config/site";
-import { type SettingsMenuItem } from "~/lib/sanity.queries";
-import { type z } from "zod";
+import * as React from "react"
+import Link from "next/link"
+import { useSelectedLayoutSegment } from "next/navigation"
+import { Pizza, X } from "lucide-react"
+import { type z } from "zod"
+
+import { siteConfig } from "~/config/site"
+import { type SettingsMenuItem } from "~/lib/sanity.queries"
+import { cn } from "~/lib/utils"
+import { Button } from "~/components/ui/button"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "~/components/ui/tooltip";
-import { Button } from "~/components/ui/button";
-import { MobileNav } from "./mobile-nav";
-import { cn } from "~/lib/utils";
+} from "~/components/ui/tooltip"
+
+import { MobileNav } from "./mobile-nav"
 
 interface MainNavProps {
-  items: z.infer<typeof SettingsMenuItem>[];
-  children?: React.ReactNode;
+  items: z.infer<typeof SettingsMenuItem>[]
+  children?: React.ReactNode
 }
 
 export function MainNav({ items, children }: MainNavProps) {
-  const segment = useSelectedLayoutSegment();
-  const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
+  const segment = useSelectedLayoutSegment()
+  const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
 
   return (
     <div className="flex gap-6 md:gap-10">
@@ -47,7 +49,7 @@ export function MainNav({ items, children }: MainNavProps) {
               >
                 {navItem.title}
               </a>
-            );
+            )
           } else if (navItem.has_secondary_pages && navItem.secondary_pages) {
             return (
               <TooltipProvider delayDuration={100} key={navItem._id}>
@@ -78,10 +80,10 @@ export function MainNav({ items, children }: MainNavProps) {
                   <TooltipContent align="start" alignOffset={14}>
                     <div className="flex flex-col gap-2 bg-card px-4 py-2">
                       {navItem.secondary_pages.map((navItemSecondary) => {
-                        const subCategorySlug = navItem.main_page?.slug;
+                        const subCategorySlug = navItem.main_page?.slug
                         const itemHref = `${
                           subCategorySlug ? `${subCategorySlug}/` : ""
-                        }${navItemSecondary.slug ?? ""}`;
+                        }${navItemSecondary.slug ?? ""}`
 
                         return (
                           <Link
@@ -96,13 +98,13 @@ export function MainNav({ items, children }: MainNavProps) {
                           >
                             {navItemSecondary.title}
                           </Link>
-                        );
+                        )
                       })}
                     </div>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-            );
+            )
           } else {
             return (
               <Link
@@ -117,7 +119,7 @@ export function MainNav({ items, children }: MainNavProps) {
               >
                 {navItem.title}
               </Link>
-            );
+            )
           }
         })}
       </nav>
@@ -132,5 +134,5 @@ export function MainNav({ items, children }: MainNavProps) {
         <MobileNav items={items}>{children}</MobileNav>
       )}
     </div>
-  );
+  )
 }

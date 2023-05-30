@@ -2,8 +2,8 @@
  * This plugin contains all the logic for setting up the singletons
  */
 
-import { type DocumentDefinition } from "sanity";
-import { type StructureResolver } from "sanity/desk";
+import { type DocumentDefinition } from "sanity"
+import { type StructureResolver } from "sanity/desk"
 
 export const singletonPlugin = (types: string[]) => {
   return {
@@ -15,22 +15,22 @@ export const singletonPlugin = (types: string[]) => {
         if (creationContext.type === "global") {
           return prev.filter(
             (templateItem) => !types.includes(templateItem.templateId)
-          );
+          )
         }
 
-        return prev;
+        return prev
       },
       // Removes the "duplicate" action on the Singletons (such as Home)
       actions: (prev, { schemaType }) => {
         if (types.includes(schemaType)) {
-          return prev.filter(({ action }) => action !== "duplicate");
+          return prev.filter(({ action }) => action !== "duplicate")
         }
 
-        return prev;
+        return prev
       },
     },
-  };
-};
+  }
+}
 
 // The StructureResolver is how we're changing the DeskTool structure to linking to document (named Singleton)
 // like how "Home" is handled.
@@ -50,17 +50,17 @@ export const pageStructure = (
             .schemaType(typeDef.name)
             .documentId(typeDef.name)
             .views([S.view.form()])
-        );
-    });
+        )
+    })
 
     // The default root list items (except custom ones)
     const defaultListItems = S.documentTypeListItems().filter(
       (listItem) =>
         !typeDefArray.find((singleton) => singleton.name === listItem.getId())
-    );
+    )
 
     return S.list()
       .title("Content")
-      .items([...singletonItems, S.divider(), ...defaultListItems]);
-  };
-};
+      .items([...singletonItems, S.divider(), ...defaultListItems])
+  }
+}

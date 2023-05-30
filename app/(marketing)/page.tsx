@@ -1,10 +1,11 @@
-import { getHomePage } from "~/lib/sanity.client";
-import { notFound } from "next/navigation";
+import { notFound } from "next/navigation"
+
+import { getHomePage } from "~/lib/sanity.client"
 
 export default async function HomePage() {
-  const data = await getHomePage();
+  const data = await getHomePage()
 
-  if (!data) notFound();
+  if (!data) notFound()
 
   return (
     <section className="pt-40 md:pt-56">
@@ -17,5 +18,5 @@ export default async function HomePage() {
         </p>
       </div>
     </section>
-  );
+  )
 }

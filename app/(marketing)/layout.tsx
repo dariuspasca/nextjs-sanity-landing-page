@@ -1,11 +1,11 @@
-import { MainNav } from "~/components/main-nav";
-import { SiteFooter } from "~/components/site-footer";
-import { TailwindIndicator } from "~/components/tailwind-indicator";
-import { siteConfig } from "~/config/site";
-import { getFooter, getSettingsPage } from "~/lib/sanity.client";
+import { siteConfig } from "~/config/site"
+import { getFooter, getSettingsPage } from "~/lib/sanity.client"
+import { MainNav } from "~/components/main-nav"
+import { SiteFooter } from "~/components/site-footer"
+import { TailwindIndicator } from "~/components/tailwind-indicator"
 
 interface PageLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export const metadata = {
@@ -48,11 +48,11 @@ export const metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
-};
+}
 
 export default async function PageLayout({ children }: PageLayoutProps) {
-  const settings = await getSettingsPage();
-  const footer = await getFooter();
+  const settings = await getSettingsPage()
+  const footer = await getFooter()
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -65,5 +65,5 @@ export default async function PageLayout({ children }: PageLayoutProps) {
       <SiteFooter footer={footer} />
       <TailwindIndicator />
     </div>
-  );
+  )
 }

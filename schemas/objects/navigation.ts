@@ -1,4 +1,4 @@
-import { defineType } from "sanity";
+import { defineType } from "sanity"
 
 export default defineType({
   name: "navigation",
@@ -64,4 +64,4 @@ export default defineType({
         !!document?.has_external_link || !document?.has_secondary_pages,
     },
   ],
-});
+})

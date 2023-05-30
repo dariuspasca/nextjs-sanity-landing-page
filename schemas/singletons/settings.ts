@@ -1,5 +1,5 @@
-import { Cog } from "lucide-react";
-import { defineArrayMember, defineField, defineType } from "sanity";
+import { Cog } from "lucide-react"
+import { defineArrayMember, defineField, defineType } from "sanity"
 
 export default defineType({
   name: "settings",
@@ -74,7 +74,7 @@ export default defineType({
     prepare() {
       return {
         title: "Menu Items",
-      };
+      }
     },
   },
-});
+})

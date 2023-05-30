@@ -1,5 +1,5 @@
-import { defineType, defineField } from "sanity";
-import { MenuSquare } from "lucide-react";
+import { MenuSquare } from "lucide-react"
+import { defineField, defineType } from "sanity"
 
 export default defineType({
   name: "page",
@@ -88,4 +88,4 @@ export default defineType({
       ],
     }),
   ],
-});
+})

@@ -1,17 +1,18 @@
-import Link from "next/link";
-import { siteConfig } from "~/config/site";
-import { Pizza } from "lucide-react";
-import { type SettingsMenuItem } from "~/lib/sanity.queries";
-import { type z } from "zod";
-import { useLockBody } from "~/hooks/use-lock-body";
+import Link from "next/link"
+import { Pizza } from "lucide-react"
+import { type z } from "zod"
+
+import { siteConfig } from "~/config/site"
+import { type SettingsMenuItem } from "~/lib/sanity.queries"
+import { useLockBody } from "~/hooks/use-lock-body"
 
 interface MobileNavProps {
-  items: z.infer<typeof SettingsMenuItem>[];
-  children?: React.ReactNode;
+  items: z.infer<typeof SettingsMenuItem>[]
+  children?: React.ReactNode
 }
 
 export function MobileNav({ items, children }: MobileNavProps) {
-  useLockBody();
+  useLockBody()
 
   return (
     <div className="fixed inset-0 top-16 z-50 grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md animate-in slide-in-from-bottom-80 md:hidden">
@@ -33,7 +34,7 @@ export function MobileNav({ items, children }: MobileNavProps) {
                 >
                   {navItem.title}
                 </a>
-              );
+              )
             }
             return (
               <Link
@@ -43,11 +44,11 @@ export function MobileNav({ items, children }: MobileNavProps) {
               >
                 {navItem.title}
               </Link>
-            );
+            )
           })}
         </nav>
         {children}
       </div>
     </div>
-  );
+  )
 }

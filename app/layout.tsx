@@ -1,21 +1,22 @@
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Poppins } from "next/font/google"
 
-import "~/styles/globals.css";
-import { cn } from "lib/utils";
+import "~/styles/globals.css"
+
+import { cn } from "lib/utils"
 
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
-});
+})
 
 const fontHeading = Poppins({
   weight: ["300", "400", "500", "600", "700", "800"],
   subsets: ["latin"],
   variable: "--font-heading",
-});
+})
 
 interface RootLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -32,5 +33,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
         {children}
       </body>
     </html>
-  );
+  )
 }

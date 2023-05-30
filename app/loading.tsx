@@ -1,5 +1,5 @@
-import Loader from "~/components/loader";
+import Loader from "~/components/loader"
 
 export default function RootLoading() {
-  return <Loader />;
+  return <Loader />
 }

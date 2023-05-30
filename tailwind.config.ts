@@ -1,5 +1,5 @@
-import { type Config } from "tailwindcss";
-import defaultTheme from "tailwindcss/defaultTheme";
+import { type Config } from "tailwindcss"
+import defaultTheme from "tailwindcss/defaultTheme"
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -79,4 +79,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
-} satisfies Config;
+} satisfies Config

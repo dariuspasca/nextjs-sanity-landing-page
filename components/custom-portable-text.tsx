@@ -1,11 +1,12 @@
-import { PortableText, type PortableTextComponents } from "@portabletext/react";
-import type { PortableTextLink } from "@portabletext/types";
-import { type portableContentBlockZ } from "~/lib/sanity.queries";
-import { type z } from "zod";
+import { PortableText, type PortableTextComponents } from "@portabletext/react"
+import type { PortableTextLink } from "@portabletext/types"
+import { type z } from "zod"
+
+import { type portableContentBlockZ } from "~/lib/sanity.queries"
 
 interface CustomPortableTextProps {
-  paragraphClasses?: string;
-  value: z.infer<typeof portableContentBlockZ>;
+  paragraphClasses?: string
+  value: z.infer<typeof portableContentBlockZ>
 }
 
 export function CustomPortableText({
@@ -15,7 +16,7 @@ export function CustomPortableText({
   const components: PortableTextComponents = {
     block: {
       normal: ({ children }) => {
-        return <p className={paragraphClasses}>{children}</p>;
+        return <p className={paragraphClasses}>{children}</p>
       },
     },
     marks: {
@@ -23,8 +24,8 @@ export function CustomPortableText({
         value,
         children,
       }: {
-        value?: PortableTextLink;
-        children: React.ReactNode;
+        value?: PortableTextLink
+        children: React.ReactNode
       }) => {
         return (
           <a
@@ -34,10 +35,10 @@ export function CustomPortableText({
           >
             {children}
           </a>
-        );
+        )
       },
     },
-  };
+  }
 
-  return <PortableText components={components} value={value} />;
+  return <PortableText components={components} value={value} />
 }

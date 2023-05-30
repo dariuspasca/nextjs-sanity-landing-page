@@ -1,17 +1,17 @@
-import { groq } from "next-sanity";
-import { z } from "zod";
+import { groq } from "next-sanity"
+import { z } from "zod"
 
 export const homePageQuery = groq`
   *[_type == "home"][0]{
     title,
     description
   }
-`;
+`
 
 export const HomePageQueryResponse = z.object({
   title: z.string(),
   description: z.string(),
-});
+})
 
 export const settingsQuery = groq`
   *[_type == "settings"][0]{
@@ -25,15 +25,15 @@ export const settingsQuery = groq`
       secondary_pages[]->{_id,title,"slug": slug.current}
     },
   }
-`;
+`
 
-const Slug = z.string().nullish();
+const Slug = z.string().nullish()
 
 const SettingsNavPage = z.object({
   _id: z.string().min(1),
   title: z.string().min(1),
   slug: Slug,
-});
+})
 
 export const SettingsMenuItem = z.object({
   _id: z.string().min(1),
@@ -43,11 +43,11 @@ export const SettingsMenuItem = z.object({
   main_page: SettingsNavPage.nullish(),
   has_secondary_pages: z.boolean(),
   secondary_pages: SettingsNavPage.array().nullish(),
-});
+})
 
 export const SettingsQueryResponse = z.object({
   menuItems: SettingsMenuItem.array(),
-});
+})
 
 export const pagesBySlugQuery = groq`
   *[_type == "page" && slug.current == $slug][0] {
@@ -55,16 +55,16 @@ export const pagesBySlugQuery = groq`
     title,
     content,
   }
-`;
+`
 
 const baseTypedObjectZ = z
   .object({
     _type: z.string(),
     _key: z.string(),
   })
-  .passthrough();
+  .passthrough()
 
-export const portableContentBlockZ = z.array(baseTypedObjectZ);
+export const portableContentBlockZ = z.array(baseTypedObjectZ)
 
 export const PagesBySlugQueryResponse = z
   .object({
@@ -73,13 +73,13 @@ export const PagesBySlugQueryResponse = z
     slug: Slug,
     content: portableContentBlockZ.nullish(),
   })
-  .nullish();
+  .nullish()
 
 export const pagesSeoBySlugQuery = groq`
   *[_type == "page" && slug.current == $slug][0] {
     ...seo
   }
-`;
+`
 
 export const PagesSeoBySlugQueryResponse = z
   .object({
@@ -88,16 +88,16 @@ export const PagesSeoBySlugQueryResponse = z
     metaDescription: z.string().min(1),
     keywords: z.string(),
   })
-  .nullish();
+  .nullish()
 
 export const footerQuery = groq`
   *[_type == "settings"][0]{
     'content': footer
   }
-`;
+`
 
 export const FooterQueryResponse = z
   .object({
     content: portableContentBlockZ.nullish(),
   })
-  .nullish();
+  .nullish()
